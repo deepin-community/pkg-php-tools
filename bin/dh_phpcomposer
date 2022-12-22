@@ -1,0 +1,138 @@
+#!/usr/bin/perl -w
+
+=head1 NAME
+
+dh_phpcomposer - calculates PHP Composer substvars
+
+=head1 SYNOPSIS
+
+B<dh_phpcomposer> [S<I<debhelper options>>] [S<I<options>>]
+
+=head1 DESCRIPTION
+
+B<dh_phpcomposer> is a debhelper program that is responsible for generating
+the B<${phpcomposer:*}> substitutions and adding them to substvars files.
+
+The program will look for F<composer.json> file in the package root,
+and will use this information to generate:
+
+=over 2
+
+=item *
+
+B<${phpcomposer:name}> and B<${phpcomposer:description}>
+
+=item *
+
+B<${phpcomposer:Debian-require}>, B<${phpcomposer:Debian-require-dev}>,
+B<${phpcomposer:Debian-conflict}>, B<${phpcomposer:Debian-replace}>,
+B<${phpcomposer:Debian-provide}>, B<${phpcomposer:Debian-suggest}> and
+B<${phpcomposer:Debian-recommend}>
+
+=back
+
+Those variables will be substituted into the package's F<control>
+file wherever the token B<${phpcomposer:*}> are placed.
+
+This feature requires pkg-php-tools (>= 1.7~).
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--sourcedirectory=>I<directory>
+
+Assume that the original package source tree is at the specified directory
+rather than the top level directory of the Debian source package tree.
+
+This feature requires pkg-php-tools (>= 1.14~).
+
+=back
+
+=head1 FILES
+
+=over 4
+
+=item F<debian/pkg-php-tools-overrides>
+
+Package that don't want to follow automatic Composer package name to Debian package
+name conversion can override the conversion by creating this file.
+
+More information is available in L<dh_phppear(1)>.
+
+=back
+
+=cut
+
+use strict;
+use warnings;
+use Cwd ();
+use File::Spec;
+use Debian::Debhelper::Dh_Lib;
+
+
+sub _shell_exec {
+	my $child_pid = open(my $output, "-|", @_) // error("@_ failed to fork: $!");
+	if ($child_pid) {
+		waitpid $child_pid, 0;
+	} else {
+		exit 0;
+	}
+	if ($? == -1) {
+		error("@_ failed to execute: $!");
+	}
+	elsif ($? & 127) {
+		error("@_ died with signal ".($? & 127));
+	}
+	elsif ($? != 0) {
+		error("@_ returned exit code ".($? >> 8));
+	}
+	return $output;
+}
+
+my $opt_sourcedir = '.';
+init(options => {
+	"D=s" => \$opt_sourcedir,
+	"sourcedirectory=s" => \$opt_sourcedir,
+});
+
+# Check and canonalize $opt_sourcedir
+{
+	# Get relative sourcedir abs_path (without symlinks)
+	my $abspath = Cwd::abs_path($opt_sourcedir);
+	my $cwd = Cwd::getcwd();
+	if (! -d $abspath || $abspath !~ /^\Q$cwd\E/) {
+		error("invalid or non-existing path to the source directory: ".$opt_sourcedir);
+	}
+	$opt_sourcedir = File::Spec->abs2rel($abspath, $cwd);
+}
+
+foreach my $package (@{$dh{DOPACKAGES}}) {
+	if (-e File::Spec->catfile($opt_sourcedir, "composer.json")) {
+		my $substvars = _shell_exec('/usr/bin/pkgtools', '-v', '--sourcedirectory', $opt_sourcedir, 'phpcomposer', 'substvars');
+		while (<$substvars>) {
+			if (/^([^=]+)=\s*(.*)$/) {
+				addsubstvar($package, $1, $2);
+			} else {
+				warning("Malformed line: $_");
+			}
+		}
+	}
+}
+
+=head1 CONFORMING TO
+
+Debian policy, version 3.9.6.
+
+PHP PEAR policy, version yet-to-be-written.
+
+=head1 SEE ALSO
+
+L<debhelper(7)>,
+L<pkg-php-tools(7)>,
+F</usr/share/doc/pkg-php-tools/README.Composer>
+
+=head1 AUTHOR
+
+Mathieu Parent <sathieu@debian.org>
+

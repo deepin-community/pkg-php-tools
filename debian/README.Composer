@@ -1,0 +1,52 @@
+= Getting started
+
+A Composer package using pkg-php-tools is initialized using dh_make (with dh7 rule
+format, now default). Usual cleaning is done (replacing all boilerplate). Then
+debian/control and debian/rules are edited as below (example with package
+php-foo). Files should be installed using the standard debian/install file.
+
+That's it!
+
+debian/rules:
+-------------
+<<<---
+#!/usr/bin/make -f
+%:
+	dh $@ --with phpcomposer
+--->>>
+
+debian/control:
+---------------
+<<<---
+Source: php-foo
+Section: php
+Priority: optional
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Uploaders: Your Name <your.name@example.org>
+Build-Depends: debhelper (>= 9), pkg-php-tools (>= 1.7~)
+Standards-Version: 3.9.6
+Homepage: https://packagist.org/packages/foo/foo
+Vcs-Git: git://anonscm.debian.org/pkg-php/php-foo.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-php/php-foo.git
+
+Package: php-foo
+Architecture: all
+Depends: ${misc:Depends}, ${phpcomposer:Debian-require}
+Recommends: ${phpcomposer:Debian-recommend}
+Suggests: ${phpcomposer:Debian-suggest}
+Description: ${phpcomposer:description}
+ (fill in long description)
+--->>>
+
+Note: You can also add the following fields (check that they behave as expected):
+Replaces: ${phpcomposer:Debian-replace}
+Breaks: ${phpcomposer:Debian-conflict}, ${phpcomposer:Debian-replace}
+Provides: ${phpcomposer:Debian-provide}
+
+Note: if the description used by the upstream does not really fit the debian
+guidelines, feel free to ignore  ${phpcomposer:description} and provide your
+handcrafted short description.
+
+= Advanced usage
+
+Advanced usage is described in dh_phpcomposer(1).

@@ -1,0 +1,3 @@
+Test-Command: phpunit --no-configuration --bootstrap tests/autoload-installed.php ./tests
+Restrictions: allow-stderr
+Depends: @, phpunit (>= 6~)

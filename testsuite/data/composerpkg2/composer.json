@@ -1,0 +1,61 @@
+{
+    "name": "vendor/project2",
+    "type": "library",
+    "description": "Some vendor project 2",
+    "keywords": ["Test", "Project2"],
+    "homepage": "http://example.org/",
+    "license" : "BSD-3-Clause",
+    "authors": [
+        {
+            "name" : "Foo Bar",
+            "email" : "foo.bar@example.org"
+        }
+    ],
+    "require": {
+        "proj1/equal-any" : "*",
+        "proj1/equal-self" : "self.version",
+        "proj1/equal-wildcard" : "2.*",
+        "proj1/equal-exact" : "3.1.2",
+        "proj1/range-ge" : ">= 1.0",
+        "proj1/range-ge-lt" : ">=1.1, <1.9",
+        "proj1/range-gt-le" : ">1.1, <=1.9",
+        "proj1/range-no-comma" : ">=3.3.4 <4",
+        "proj2/range-no-comma" : "> 1.1 <= 2",
+        "proj1/tilde" : "~1.2",
+        "proj1/tilde-major" : "~5",
+        "proj1/caret" : "^1.2.3",
+        "proj1/caret-pre-1.0" : "^0.1.2",
+        "proj1/unsupported-or" : ">=1.0,<1.1 | >=1.2",
+        "proj1/stability-dev": ">=0.3.1,<0.4-dev",
+        "proj1/stability-patch": ">=0.4-patch1",
+        "proj1/stability-beta": ">= 2.3-beta2",
+        "proj1/stabilityflag-alpha-caps": "2.0.*@ALPHA",
+        "proj1/stabilityflag-beta": "1.0.*@beta",
+        "proj1/stabilityflag-dev": "@dev",
+        "proj1/alias-dev-master": "dev-master",
+        "proj1/alias-inline": "dev-bugfix as 1.0.x-dev",
+        "proj1/underscore_CAPS.dot": ">= 2.0"
+    },
+    "recommend": {
+        "lib-curl": ">= 7.37",
+        "lib-iconv": "*",
+        "lib-icu": ">= 50",
+        "lib-libxml": ">= 2.8",
+        "lib-openssl": ">= 1.0.1",
+        "lib-pcre": ">= 8.30",
+        "lib-uuid": "*",
+        "lib-xsl": ">= 1.1.24",
+        "lib-unknown": "*"
+    },
+    "suggest" : {
+        "proj1/suggest-unparsable" : "This may be a comment",
+        "proj1/suggest-versioned" : ">12"
+    },
+    "provide" : {
+        "proj1/provide-versioned" : "1.7.*",
+        "proj1/provide-any" : "*"
+    },
+    "bin" : [
+        "bin/some-script"
+    ]
+}

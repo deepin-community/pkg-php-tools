@@ -1,0 +1,26 @@
+extension mysqli php-mysql
+extension dom php-xml
+extension simplexml php-xml
+extension wddx php-xml
+extension xsl php-xml
+extension com none
+pecl.php.net APC php-apcu
+pear.phpunit.de PHPUnit phpunit
+pear.phpunit.de PHPUnit_Story phpunit-story
+symfony polyfill-apcu php-apcu none
+symfony polyfill-ctype builtin
+symfony polyfill-iconv builtin
+symfony polyfill-intl-grapheme php-intl none
+symfony polyfill-intl-icu php-intl none
+symfony polyfill-intl-idn php-intl none
+symfony polyfill-intl-messageformatted php-intl none
+symfony polyfill-intl-normalizer php-intl none
+symfony polyfill-mbstring php-mbstring none
+symfony polyfill-php54 builtin
+symfony polyfill-php55 builtin
+symfony polyfill-php56 builtin
+symfony polyfill-php70 builtin
+symfony polyfill-php71 builtin
+symfony polyfill-php72 builtin
+symfony polyfill-php73 builtin
+symfony polyfill-xml php-xml none

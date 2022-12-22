@@ -1,0 +1,34 @@
+=head1 NAME
+
+pkg-php-tools - debhelper tool suite for PHP PEAR and Composer packages
+
+=head1 DESCRIPTION
+
+For a quick start, read F</usr/share/doc/pkg-php-tools/README.PEAR> or
+F</usr/share/doc/pkg-php-tools/README.Composer>.
+
+L<dh_phppear(1)> is a debhelper program that is responsible for generating the
+B<${phppear:*}> substitutions and adding them to substvars files. See the
+corresponding manpage.
+
+L<dh_phpcomposer(1)> is a debhelper program that is responsible for generating
+the B<${phpcomposer:*}> substitutions and adding them to substvars files. See
+the corresponding manpage.
+
+I<Debian::Debhelper::Buildsystem::phppear> is an additional build system
+targeted at PHP PEAR packages (with a F<package.xml> or F<package2.xml> file).
+
+Please note that this tool suite is not part of debhelper.
+
+=head1 SEE ALSO
+
+L<dh_phpcomposer(1)>,
+L<dh_phppear(1)>,
+L<debhelper(7)>,
+F</usr/share/doc/pkg-php-tools/README.Composer>,
+F</usr/share/doc/pkg-php-tools/README.PEAR>
+
+=head1 AUTHOR
+
+Mathieu Parent <sathieu@debian.org>
+

@@ -1,0 +1,336 @@
+#!/usr/bin/php
+<?php
+/*
+=head1 NAME
+
+phpabtpl - generate phpab templates with dependency autoloading
+
+=head1 SYNOPSIS
+
+B<phpabtpl> [I<OPTION>...] [I<composer.json>]
+
+=head1 DESCRIPTION
+
+B<phpabtpl> is a command-line tool used to generate B<phpab> autoloader
+templates. In addition to the regular autoloading of the package's own class
+files, the generated template will also include automatic loading of
+dependencies and statically loaded files, based on the specification read from
+a I<composer.json> file.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-h, --help>
+
+Print a help message and exit.
+
+=item B<--basedir> I<directory>
+
+Set the base directory for "files" autoloading.
+
+This option can be used to adjust the paths for statically loaded files
+(Composer's "files" section), to treat them as relative to the specified
+directory rather than to the source's root. This would typical be used for
+packages where the actual source files are kept in a sub-directory (commonly
+"src").
+
+Limitation: This directory must be somewhere above the to-be-loaded files in
+the file hierarchy. It will not traverse upwards.
+
+=item B<--require> I<composer_package>
+
+Adds an additional required dependency to be loaded.
+
+I<composer_package> is the name of a Composer package, e.g. "vendor/project".
+It is treated as an extra entry in the composer.json "require" section.
+
+This option can be repeated to add multiple dependencies.
+
+=item B<--suggest> I<composer_package>
+
+Adds an additional suggested dependency to be (optionally) loaded.
+
+I<composer_package> is the name of a Composer package, e.g. "vendor/project".
+It is treated as an extra entry in the composer.json "suggest" section.
+
+This option can be repeated to add multiple dependencies.
+
+=item B<--require-file> I<file>
+
+Adds an additional file to be loaded.
+
+The I<file> path will be adapted to B<--basedir>, if given.
+It is treated as an extra entry in the composer.json "autoload.files" section.
+
+This option can be repeated to add multiple files.
+
+=back
+
+=head1 EXAMPLES
+
+=over 4
+
+=item Generate a template with dependency autoloading:
+
+phpabtpl composer.json >autoload.php.tpl
+
+=item Generate a template for an autoloader to be placed in the "src" directory:
+
+phpabtpl --basedir src composer.json >autoload.php.tpl
+
+=item Generate a template with manually specified dependencies:
+
+phpabtpl --require proj1/pack1 --require-file src/autoload.php
+
+=back
+
+=head1 FILES
+
+=over 4
+
+=item F<debian/pkg-php-tools-autoloaders>
+
+Autoloaders that are not correctly identified by B<phpabtpl> by default can be
+manually specified in this file.
+
+The format is a set of lines, with each line having the following fields:
+
+=over 6
+
+=item I<vendor_name>
+
+The Composer package's vendor name (e.g. "vendor" in "vendor/project").
+
+=item I<project_name>
+
+The Composer package's project name (e.g. "project" in "vendor/project").
+
+=item I<autoloader_path>
+
+The corresponding autoloader file (e.g. "Vendor/Project/autoload.php").
+
+=back
+
+It can be installed in B</usr/share/pkg-php-tools/autoloaders/>I<package>.
+
+=back
+
+=cut
+*/
+
+$usage = <<<USAGE
+Usage: $argv[0] [OPTION...] [composer.json]
+
+  -h, --help          Print a help message and exit.
+  --basedir           Set the base directory for 'files' autoloading.
+  --require           Load an additional required dependency (repeatable).
+  --suggest           Load an additional suggested dependency (repeatable).
+  --require-file      Load an additional required file (repeatable).
+
+USAGE;
+
+/*
+Read user input.
+*/
+
+$options = getopt('h', [
+	'basedir:',
+	'help',
+	'require:',
+	'suggest:',
+	'require-file:',
+], $argi);
+
+# -h, --help
+$help = isset($options['h']) || isset($options['help']);
+if ($help) {
+	print $usage;
+	exit;
+}
+
+# --basedir
+$basedir = $options['basedir'] ?? null;
+if ($basedir !== null)
+	$basedir = rtrim($basedir, '/').'/';
+
+# --require, --suggest, --require-file
+$extra_requires = (array)($options['require'] ?? null);
+$extra_suggests = (array)($options['suggest'] ?? null);
+$extra_files = (array)($options['require-file'] ?? null);
+
+# composer.json
+$composer = $argv[$argi] ?? null;
+if ($composer) {
+	$composer = file_get_contents($composer);
+	$composer = json_decode($composer, true, 512, JSON_THROW_ON_ERROR);
+} else {
+	fwrite(STDERR, 'Proceeding without a composer.json file.');
+	$composer = [];
+}
+
+/*
+Load known autoloaders from list files
+1. /usr/share/pkg-php-tools/autoloaders/common
+2. /usr/share/pkg-php-tools/autoloaders/*
+3. debian/pkg-php-tools-autoloaders
+*/
+
+$autoloaders = [];
+
+function load_list($file) {
+	global $autoloaders;
+	if (!file_exists($file))
+		return;  # Ignore missing file
+	if (($fh = fopen($file, 'r')) === false)
+		throw new \RuntimeException("Unable to open '$file'");
+	while (($line = fgets($fh)) !== false) {
+		$line = trim($line);
+		if (!$line)
+			continue;  # Ignore empty line
+		$fields = preg_split('/\s+/', $line, 3);
+		if (count($fields) < 2) {  # 3rd field may be empty
+			fwrite(STDERR, "Ignoring malformed line '$line' in $file\n");
+			continue;
+		}
+		$dependency = $fields[0].'/'.$fields[1];
+		$autoloader = ($fields[2] ?? 'none') !== 'none' ? $fields[2] : null;
+		$autoloaders[$dependency] = $autoloader;
+	}
+	if (!feof($fh))
+		throw new \RuntimeException("Unable to read '$file'");
+	fclose($fh);
+}
+
+# Load list of common known autoloaders
+$lists_dir = dirname(dirname(__FILE__)).'/share/pkg-php-tools/autoloaders';
+load_list("$lists_dir/common");
+
+# Load other installed lists of known autoloaders
+if (($dh = opendir($lists_dir)) === false)
+	throw new \RuntimeException("Unable to open '$lists_dir'");
+while (($file = readdir($dh)) !== false) {
+	if (!in_array($file, ['.', '..', 'common']))
+		load_list("$lists_dir/$file");
+}
+closedir($dh);
+
+# Load list from current package
+load_list('debian/pkg-php-tools-autoloaders');
+
+/*
+Figure out autoloaders based on
+1. Known autoloaders
+2. Guessed namespaces
+*/
+
+function get_autoloader($dependency) {
+	global $autoloaders;
+	# Ignore php and extensions
+	if (preg_match('/^(php(-cli)?$|ext-)/', $dependency))
+		return null;
+	# Known?
+	if (array_key_exists($dependency, $autoloaders))
+		return $autoloaders[$dependency];
+	# Guess
+	$ns = remove_repeated_parts($dependency);
+	$ns = ucwords($ns, '/-_.');
+	$ns = str_replace(['-', '_', '.'], '', $ns);
+	return "$ns/autoload.php";
+}
+
+function remove_repeated_parts($dependency) {
+	[$vendor, $project] = explode('/', $dependency, 2);
+	$vendor_parts = preg_split('/[-_.]/', $vendor);
+	$project_parts = preg_split('/[-_.]/', $project);
+	$n = count($vendor_parts);
+	# Remove vendor name from project name
+	if ($vendor_parts === array_slice($project_parts, 0, $n))
+		$project_parts = array_slice($project_parts, $n);
+	# Drop first part of project name if equal to last part of vendor name
+	else if ($vendor_parts[$n-1] === $project_parts[0])
+		array_shift($project_parts);
+	$project = implode('-', $project_parts);
+	return trim("$vendor/$project", '/');
+}
+
+/*
+Collect autoloaders for all dependencies
+*/
+
+# Required packages
+$required = [];
+$dependencies = array_merge(
+	array_keys($composer['require'] ?? []),
+	$extra_requires,
+);
+foreach ($dependencies as $dependency) {
+	$path = get_autoloader($dependency);
+	if ($path !== null)
+		$required[] = $path;
+}
+
+# Suggested packages
+$suggested = [];
+$dependencies = array_merge(
+	array_keys($composer['suggest'] ?? []),
+	$extra_suggests,
+);
+foreach ($dependencies as $dependency) {
+	$path = get_autoloader($dependency);
+	if ($path !== null)
+		$suggested[] = $path;
+}
+
+# Statically loaded files
+$files = array_merge(
+	$composer['autoload']['files'] ?? [],
+	$extra_files,
+);
+foreach ($files as &$file) {
+	if ($basedir !== null && strpos($file, $basedir) === 0)
+		$file = substr($file, strlen($basedir));
+}
+
+# Output autoloader template
+sort($required);
+sort($suggested);
+sort($files);
+################################################################################
+echo "<?php\n"; ?>
+
+// Require
+<?php foreach ($required as $path) { ?>
+require_once '<?=$path?>';
+<?php } ?>
+
+// Suggest
+<?php foreach ($suggested as $path) { ?>
+if (stream_resolve_include_path('<?=$path?>')) { include_once '<?=$path?>'; }
+<?php } ?>
+
+// @codingStandardsIgnoreFile
+// @codeCoverageIgnoreStart
+// this is an autogenerated file - do not edit
+spl_autoload_register(
+    function($class) {
+        static $classes = null;
+        if ($classes === null) {
+            $classes = array(
+                ___CLASSLIST___
+            );
+        }
+        $cn = strtolower($class);
+        if (isset($classes[$cn])) {
+            require ___BASEDIR___$classes[$cn];
+        }
+    },
+    ___EXCEPTION___,
+    ___PREPEND___
+);
+// @codeCoverageIgnoreEnd
+
+// Files
+<?php foreach ($files as $path) { ?>
+require_once __DIR__.'/<?=$path?>';
+<?php } ?>

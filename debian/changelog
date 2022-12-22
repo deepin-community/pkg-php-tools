@@ -1,0 +1,647 @@
+pkg-php-tools (1.42) UNRELEASED; urgency=medium
+
+  * update
+
+ -- Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>  Wed, 25 May 2022 10:54:32 +0800
+
+pkg-php-tools (1.42) unstable; urgency=medium
+
+  * Team upload to unstable now that Bullseye has been released
+  * Update Standards-Version to 4.6.0
+
+ -- David Prévot <taffit@debian.org>  Thu, 07 Oct 2021 10:21:13 -0400
+
+pkg-php-tools (1.41) experimental; urgency=medium
+
+  * Team upload to experimental, to respect the freeze
+
+  [ Robin Gustafsson ]
+  * Add "phpabtpl" to generate autoload templates
+  * Suggest package (not src:package) for autoloaders
+
+  [ David Prévot ]
+  * Rename main branch to debian/latest (DEP-14)
+
+ -- David Prévot <taffit@debian.org>  Sat, 20 Feb 2021 18:23:02 -0400
+
+pkg-php-tools (1.40) unstable; urgency=medium
+
+  * Team upload
+
+  [ David Prévot ]
+  * Adapt to recent version of PHPUnit (9)
+  * Extend clean (.phpunit.result.cache)
+  * Use debhelper-compat 13
+  * Update Standards-Version to 4.5.1
+  * Drop Thomas from Uploaders
+  * PHP 8.0 compatibility
+
+  [ Robin Gustafsson ]
+  * Provide dh add-on sequences for Build-Depends (Closes: #960713)
+
+ -- David Prévot <taffit@debian.org>  Sun, 13 Dec 2020 11:04:10 -0400
+
+pkg-php-tools (1.39) unstable; urgency=medium
+
+  [ Jean-Michel Vourgère ]
+  * Policy version 4.0.1 deprecated package priority extra.
+
+  [ Mathieu Parent ]
+  * Use the debian/salsa-ci.yml template
+
+  [ Robin Gustafsson ]
+  * Override remaining symfony-polyfill-intl packages
+
+  [ Mathieu Parent ]
+  * Standards-Version: 4.5.0
+  * Add Rules-Requires-Root: no
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 15 Mar 2020 22:39:42 +0100
+
+pkg-php-tools (1.38) unstable; urgency=medium
+
+  * Team upload
+  * Compatibility with recent PHPUnit (8)
+  * Bump debhelper from old 11 to 12.
+
+ -- David Prévot <taffit@debian.org>  Sat, 14 Sep 2019 07:15:48 -1000
+
+pkg-php-tools (1.37) unstable; urgency=medium
+
+  [ Kunal Mehta ]
+  * Add symfony polyfill overrides (See #911832 and #821138)
+
+  [ Mathieu Parent ]
+  * Add Salsa-Pipeline
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 14 Jan 2019 11:22:44 +0100
+
+pkg-php-tools (1.36) unstable; urgency=medium
+
+  * Fix PHPUnit 6 compatibility (Closes: #889858)
+  * Ensure debian names only contain alpha, num, dash and dot characters
+    (Closes: #899082)
+  * Upgrade debhelper to compat 11
+  * Update Standards-Version to 4.1.4, no change
+  * Update Vcs-* fields to salsa
+  * Use secure copyright format URI
+  * Replace "Priority: extra" by "Priority: optional"
+  * Remove trailing spaces in d/changelog
+  * Remove trailing spaces in d/rules
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 13 Jun 2018 22:46:42 +0200
+
+pkg-php-tools (1.35) unstable; urgency=medium
+
+  [ Mathieu Parent ]
+  * Fix unused-license-paragraph-in-dep5-copyright
+  * Standards-Version: 3.9.8: no change
+
+  [ Antonio Ospite ]
+  * debian/README.Composer: s/dh_composer/dh_phpcomposer/ (Closes: #847718)
+  * README.Composer: add a note about ${phpcomposer:description}
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 27 Dec 2016 08:01:08 +0100
+
+pkg-php-tools (1.34) unstable; urgency=medium
+
+  * Remove phppkginfo, use pkgtools instead
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 18 Apr 2016 21:46:01 +0200
+
+pkg-php-tools (1.33) unstable; urgency=medium
+
+  * Fix PhpcomposerSourceTest::testBrokenOpen on php-7.0
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 05 Apr 2016 07:14:17 +0200
+
+pkg-php-tools (1.32) unstable; urgency=medium
+
+  [ Ondřej Surý ]
+  * Convert package to PHP 7.0 naming (Closes: #814858)
+  * Make php-common always unversioned (for now)
+  * Use preg_replace instead of ereg_replace
+
+  [ Mathieu Parent ]
+  * Fix test on unversioned php-common
+  * extensions DOM, SimpleXML, WDDX, XML, and XSL are now in php-xml:
+    - fix Build-Depends and Depends (Closes: #816288)
+    - fix overrides
+  * Extensions bcmath, bz2, mbstring, soap and zip are no longer builtin
+    (Closes: #815988)
+  * Standards-Version: 3.9.7: no change
+  * Use secure Vcs-* fields
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 02 Mar 2016 22:46:31 +0100
+
+pkg-php-tools (1.31) unstable; urgency=medium
+
+  * Standards-Version: 3.9.6
+  * debhelper compat mode 9
+  * Dropped XS-Testsuite control header
+  * Renamed git-buildpackage section in gbp.conf to buildpackage
+  * Fix Tilde with major version (Closes: #802989)
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 26 Oct 2015 07:14:14 +0100
+
+pkg-php-tools (1.30) unstable; urgency=medium
+
+  [ Mathieu Parent ]
+  * PEAR:
+    - consider sourceforge.net like a TLD (Closes: #785446)
+    - tests for "Drop excessive spaces from substvar"
+  * Base: Make help output deterministic
+
+  [ David Prévot ]
+  * PEAR:
+    - Drop excessive spaces from substvar (Closes: #780930)
+    - pcntl is built-in (Closes: #780537)
+  * Composer: Spaces are now equivalent to comma in constraints and mean AND
+    (Closes: #789943)
+
+ -- Mathieu Parent <sathieu@debian.org>  Thu, 25 Jun 2015 21:45:12 +0200
+
+pkg-php-tools (1.29) unstable; urgency=medium
+
+  [ Mathieu Parent ]
+  * Base:
+    - Implement automatic help
+    - Print help by default, if a subcommand is missing
+  * PEAR:
+    - Add phppear:Debian-Suggests substvar (and documentation)
+    - New methods to Phppear\Source: getChangelog(), getDate(), getLicense(),
+      getMaintainers(), getNotes() and getStability()
+    - New phppear commands: changelog, date, license, maintainers,
+      debianversion and debianname
+  * PEAR/Buildsystem: remove last use of phppkginfo (changelog)
+  * Composer:
+    - Update README to use phpcomposer:Debian-recommend substvar
+    - Support the ^ operator in version constraints
+  * testsuite:
+    - Use pkgtools instead of phppkginfo where possible
+    - Ensure non-null return status are catched
+
+  [ David Prévot ]
+  * Actually install pkg-php-tools manual in section 7
+  * Review and update documentation
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 02 May 2015 15:00:09 +0200
+
+pkg-php-tools (1.28) unstable; urgency=medium
+
+  * PEAR: Handle, but ignore OS dependencies (Closes: #775633)
+  * PEAR: Handle "group" dependencies as suggest, and "subpackage" native_types
+    like "package" (Closes: #775634)
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 18 Jan 2015 12:15:58 +0100
+
+pkg-php-tools (1.27) unstable; urgency=medium
+
+  * Fix phpunit tests:
+    - use system's include_path too
+    - using dot in package name is now valid (See #768481 below)
+  * Stability flags is incensitive
+    - Fix FTBFS of php-doctrine-instantiator (Closes: #770347)
+    - Add unit test
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 22 Nov 2014 14:37:06 +0100
+
+pkg-php-tools (1.26) unstable; urgency=medium
+
+  * PEAR/Buildsystem: Remove unused function _phppkginfo()
+  * dh_phppear, dh_phpcomposer, Buildsystem/phppear: Ensure to check return
+    value and fail accordingly (Closes: #768498)
+  * Allow dot in package name (Closes: #768481)
+
+ -- Mathieu Parent <sathieu@debian.org>  Fri, 07 Nov 2014 22:08:05 +0100
+
+pkg-php-tools (1.25) unstable; urgency=medium
+
+  * package.xml 1.0 support is back (Closes: #764012)
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 05 Oct 2014 21:39:16 +0200
+
+pkg-php-tools (1.24) unstable; urgency=medium
+
+  * PEAR: Take the first of package2.xml or package.xml (Closes: #761907)
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 04 Oct 2014 07:30:50 +0200
+
+pkg-php-tools (1.23) unstable; urgency=medium
+
+  * copyright: Fix phppkginfo path and dates
+  * Buildsystem/PEAR:
+    - Pass configure options to parent (autoconf)
+    - Move from phppkginfo to pkgtools:
+      + for name
+      + for version
+      + for packagetype. This fixes PECL packages having both package.xml and
+        package2.xml (Closes: #761907)
+  * More tests, reaching 90% lines code coverage
+
+ -- Mathieu Parent <sathieu@debian.org>  Fri, 03 Oct 2014 21:31:16 +0200
+
+pkg-php-tools (1.22) unstable; urgency=medium
+
+  [ Mathieu Parent ]
+  * Depends and Build-Depends on php5-cli >= 5.3
+  * bin/pkgtools executable from source
+  * Base (PEAR + Composer):
+    - Ensure exclude{Min,Max}Version are kept on override (Closes: #762518,
+      part 2), and test
+  * PEAR:
+    - Basic XML checks (root should be <package> and version should be 2.0 or
+      2.1)
+    - New command "version"
+    - New command "packagetype"
+    - match pre-releases case-incensitively (Closes: #762518, part 1) and test
+  * Buildsystem/PEAR:
+    - Avoid unnecessary fork of shell
+  * Composer:
+    - split long lines in description (Closes: #761322) and test
+    - Proper maxVersion handling (Closes: #762518, part 3) and test
+
+  [ David Prévot ]
+  * Composer: Remove trailing dot in description (Closes: #761373) and test
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 24 Sep 2014 15:17:55 +0200
+
+pkg-php-tools (1.21) unstable; urgency=medium
+
+  * Remove trailing dot in summary (Closes: #759738)
+  * Test for trailing dot in summary
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 30 Aug 2014 20:24:40 +0200
+
+pkg-php-tools (1.20) unstable; urgency=medium
+
+  * Add "Restrictions: allow-stderr" to d/tests/control to fix dep-8 failures
+
+ -- Mathieu Parent <sathieu@debian.org>  Thu, 28 Aug 2014 20:44:37 +0200
+
+pkg-php-tools (1.19) unstable; urgency=medium
+
+  * Fix DEP-8 tests
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 27 Aug 2014 07:42:50 +0200
+
+pkg-php-tools (1.18) unstable; urgency=medium
+
+  * Fix multi-paragraph substvars
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 27 Aug 2014 07:31:28 +0200
+
+pkg-php-tools (1.17) unstable; urgency=medium
+
+  * PEAP: Fix namespace handling to detect scripts
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 26 Aug 2014 07:59:10 +0200
+
+pkg-php-tools (1.16) unstable; urgency=medium
+
+  * Upload to unstable
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 23 Aug 2014 20:43:56 +0200
+
+pkg-php-tools (1.15) experimental; urgency=medium
+
+  * Composer:
+    - handle -dev and -patch releases properly to be before alpha, betas and RC
+    - more tests at build time
+  * PEAR: handle pre-release early (like composer)
+  * Doc: --sourcedirectory requires pkg-php-tools (>= 1.14~)
+
+ -- Mathieu Parent <sathieu@debian.org>  Fri, 22 Aug 2014 20:32:05 +0200
+
+pkg-php-tools (1.14) experimental; urgency=medium
+
+  * Complete rewrite of the plumbing below dh_php* commands. More information
+    in the git log
+  * New features includes:
+    - full refactoring: code is more readable, and faster
+    - unit test (coverage > 80%)
+    - dh_phpcomposer/dh_phppear: --sourcedirectory switch (Closes: #750695)
+    - Composer: Handle branch aliases (Closes: #738970)
+    - Composer: Handle dev and patch release (Closes: #754150)
+    - Composer: Depend on php5-cli if applicable (Closes: #714797), php-common
+      otherwise (Closes: #737752)
+    - Composer: handle lib-* dependencies (Closes: #725739)
+
+ -- Mathieu Parent <mathieu@ultrathieu.sathieu.net>  Mon, 11 Aug 2014 21:52:56 +0200
+
+pkg-php-tools (1.13) unstable; urgency=medium
+
+  * PEAR: Don't add PEAR installer dependency (only needed at install time)
+  * PEAR: Rework dependency on php5-cli: it is now separated from the
+    versionned dependency on php5-common
+  * Composer: let the maintainer decide between php5 and php5-cli (use
+    php5-common)
+  * Composer: Version x.y.* is >= 1.x and not >= 1.x~
+  * Fix corner-case overrides
+    - match case-incensibly
+    - translate "pecl.php.net" channel to "extension"
+  * Update testsuite
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 10 Aug 2014 12:42:10 +0200
+
+pkg-php-tools (1.12) unstable; urgency=medium
+
+  * Team upload
+
+  [ Prach Pongpanich ]
+  * Support Zend extensions (Closes: #737558)
+
+  [ Mathieu Parent ]
+  * Override extension/com to none, as it is for MS Windows only
+
+  [ David Prévot ]
+  * dh_phppear: Keep newline in description (Closes: #738690)
+  * Composer:
+    - Allow wildcard for WIP releases (Closes: #738284)
+    - Handle multiple versions (Closes: #746179)
+    - Handle self.version (Closes: #751413)
+
+  [ Daniel Beyer ]
+  * Composer: handle uppercase WIP releases (Closes: #751422)
+
+ -- David Prévot <taffit@debian.org>  Sat, 28 Jun 2014 13:42:25 -0400
+
+pkg-php-tools (1.11) unstable; urgency=medium
+
+  * Handle override for extensions
+    - The special channel url "extension" is used
+    - Testuite improved
+    - Added to overrides/common: "extension mysqli php5-mysql"
+  * Update Standards-Version: no change
+  * Added override "pecl.php.net APC php5-apcu"
+  * Fix typo to really disable interaction on PECL test
+  * Delete empty files in doc (this is the case for the EXPERIMENTAL file)
+  * Remove tests file during install step, instead of the error-prone sed
+    command in configure step (Closes: #737549)
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 03 Feb 2014 18:50:30 +0100
+
+pkg-php-tools (1.10) unstable; urgency=low
+
+  * Debian::Debhelper::Buildsystem::phppear: remove sha1sum
+  * Remove test files from generated packages (Closes: #732641)
+    - Patch by Prach Pongpanich: thanks!
+    - Testsuite by Prach Pongpanich: thanks!
+    - This also fixes the "directory vs. symlink conflicts" which was found
+      in packages previously handled by dh-make-php (Closes: #736294)
+  * Handle tabs and lists in ${phppear:description} (Closes: #717340)
+    - Patch by David Prévot: thanks!
+  * dh_phpcomposer: handle alpha and other WIP releases (Closes: #729452)
+    - Patch by David Prévot: thanks!
+  * Fix testsuite (symfony/yaml maps to php-symfony2-yaml when pear-
+    channels is installed
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 01 Feb 2014 15:42:34 +0100
+
+pkg-php-tools (1.9) unstable; urgency=low
+
+  * Fix "warnings when running dh_phpcomposer" (Closes: #720407)
+    - dh_phpcomposer: Warn when substvar is malformed
+    - lib/scripts/phppkginfo: Remove E_STRICT and E_DEPRECATED errors from PEAR
+  * phppear Buildsystem allowing multiple packages (Closes: #725738),
+    installing files in debian/tmp
+  * Improved documentation
+  * Testsuite:
+    - Fixed failure handling in subtests
+    - Show failures as diff
+  * Use php5-common instead of php5 in PEAR and PECL dependencies
+    (Closes: #726982, #726984)
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 21 Oct 2013 15:43:08 +0200
+
+pkg-php-tools (1.8) unstable; urgency=low
+
+  [ David Prévot ]
+  * Depends on php5-json
+  * Use << instead of deprecated <
+
+  [ Mathieu Parent ]
+  * Fix FTBFS with non-existent and non-creatable $HOME (Closes: #713949)
+  * Fix testsuite for 'Use << instead of deprecated <'
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 24 Jun 2013 16:35:50 +0200
+
+pkg-php-tools (1.7) unstable; urgency=low
+
+  * Set env NO_INTERATION=1 before 'make test'
+  * Remove /usr/share/php/.registry/.channel.pecl.php.net only if empty
+    (needed for PECL packages coming from pecl.php.net)
+  * Composer support (Closes: #711484)
+    - Enhance phppkginfo with composer_* commands (simple commands)
+    - Enhance phppkginfo with composer_substvars command translating package
+      links to Debian dependencies
+    - dh_phpcomposer: Fill substvars (name, description, and dependencies)
+    - test for dh_phpcomposer
+    - Build-depend on php5-json | php5-cli (<< 5.5.0~rc1+dfsg-1) as json has
+      been moved to an external extension
+  * phppkginfo: remove mhash and json from builtin extensions (json is
+    removed since php5 5.5.0~rc1+dfsg-1, mhash is "provided")
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 17 Jun 2013 21:39:16 +0200
+
+pkg-php-tools (1.6) unstable; urgency=low
+
+  * Back to unstable
+  * gbp: ignore-branch = True (to allow multiple branches)
+  * Remove .gitignore: build is done in ../build-area
+  * phppkginfo: Avoid PHP error when file has no attrib
+  * Add testsuite for phppkginfo (PEAR package, PECL package, PEAR channel)
+  * Add testsuite for dh_phppear (PEAR package, PECL package, PEAR channel)
+  * Add testsuite for Debian::Debhelper::Buildsystem::phppear (PEAR package)
+  * Add php5-cli and php-pear to buildeps for the testsuite
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 03 Jun 2013 20:49:33 +0200
+
+pkg-php-tools (1.5.2) experimental; urgency=low
+
+  * revert "Skip dh_phppear if no package.xml, package2.xml or channel.xml"
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 28 May 2013 17:15:43 +0200
+
+pkg-php-tools (1.5.1) experimental; urgency=low
+
+  * phppkginfo: Trim phpapi to avoid extra new line on PECL substvars
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 28 May 2013 13:20:26 +0200
+
+pkg-php-tools (1.5) experimental; urgency=low
+
+  * Release to experimental: Time to test!
+  * PECL packages support (Closes: #706980)
+    - chdir to package directory and pass commands to parent
+      Debian::Debhelper::Buildsystem::autoconf for configure, build, install
+      and clean
+    - run phpize before configure
+    - set INSTALLROOT on install
+    - Automatically fill depends with PHP API version
+    - Also run pear install for non compiled files
+    - Clean up tmp files
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 27 May 2013 17:16:43 +0200
+
+pkg-php-tools (1.4) unstable; urgency=low
+
+  * Improvements to phppkginfo:
+    - package_type
+  * Skip dh_phppear if no package.xml, package2.xml or channel.xml
+  * Use canonical URI in Vcs-* fields (Closes: #708567)
+  * Don't advise substvars in Source section of control file (Closes: #709519)
+  * Document version requirements
+  * Use package2.xml when present
+  * Fail on unsupported package type
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 27 May 2013 12:52:43 +0200
+
+pkg-php-tools (1.3) unstable; urgency=low
+
+  * PEAR channels support (Closes: #656960)
+    - detect channel.xml file
+    - carefully install only channel files
+    - more substvars
+  * Bumped Standards-Version to 3.9.4 (no change).
+  * Documentation updates and improvements
+
+ -- Mathieu Parent <sathieu@debian.org>  Tue, 08 Jan 2013 22:20:54 +0100
+
+pkg-php-tools (1.2) unstable; urgency=low
+
+  * Compare to builtin extensions case-incensitively and don't "generate broken
+    dependency on php5-spl" (Closes: #696743)
+  * internal changes:
+    - rename _pear("install", ...) to _pear_install(...)
+
+ -- Mathieu Parent <sathieu@debian.org>  Mon, 07 Jan 2013 20:28:20 +0100
+
+pkg-php-tools (1.1) unstable; urgency=low
+
+  * Upload to unstable, as needed by php-horde-mail (Closes: #697499),
+    php-horde-test (Closes: #697498) and maybe more
+  * More documentation
+  * Move package.xml modifications to configure step. this allows wild things
+    to happen between configure and install (like removing references to files)
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 06 Jan 2013 19:16:37 +0100
+
+pkg-php-tools (1) experimental; urgency=low
+
+  * Use integer versions
+  * Renamed debian/pkg-php-tools-override to debian/pkg-php-tools-overrides
+  * New override for  phpunit-story
+  * "builtin" and "none" special package names converts to NULL
+  * PDO considered builtin (included in php5-common)
+  * new "extension" pseudo channel to call
+    pearExtensionNameToDebianPackageName()
+
+ -- Mathieu Parent <sathieu@debian.org>  Wed, 12 Dec 2012 21:36:32 +0100
+
+pkg-php-tools (0.9) experimental; urgency=low
+
+  [ Olivier Berger ]
+  * fix for docs installed in subdir which is not necessary
+
+  [ Mathieu Parent ]
+  * Clean COPYING and LICENSE files anywhere in doc
+  * Allow to override Debian package names (needed for PHPUnit, see #656244).
+    More info in dh_phppear(1) manpage.
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 09 Dec 2012 13:46:47 +0100
+
+pkg-php-tools (0.8) unstable; urgency=low
+
+  * Updated Vcs fields to use the pkg-php repo on Alioth.
+  * Added myself as uploader.
+  * Patched lib/scripts/phppkginfo to not have warnings in case there's no
+  upstream changelog in the package.xml.
+  * Added a debian/gbp.conf.
+  * Bumped Standards-Version: to 3.9.3 (no change).
+
+ -- Thomas Goirand <zigo@debian.org>  Mon, 07 May 2012 14:24:48 +0000
+
+pkg-php-tools (0.7) unstable; urgency=low
+
+  * Fix prune of /usr/share/doc subdirectories when it doesn't exists
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 12 Feb 2012 19:28:17 +0100
+
+pkg-php-tools (0.6) unstable; urgency=low
+
+  * phppkginfo: support aNN and bNN for alpha and beta versions (used by the
+    PEAR package)
+  * Debian::Debhelper::Buildsystem::phppear: remove md5sums
+  * prune /usr/share/doc subdirectories (package-contains-empty-directory from
+    lintian)
+  * Use PEAR list in maintainer field (Closes: #656993)
+
+ -- Mathieu Parent <sathieu@debian.org>  Sat, 28 Jan 2012 21:29:38 +0100
+
+pkg-php-tools (0.5) unstable; urgency=low
+
+  * dh_phppear, Debian::Debhelper::Buildsystem::phppear:
+    - check for phppkginfo exit code
+    - run phppkginfo with -d option (errors are sent to STDERR)
+  * phppkginfo:
+    - various corrections to debian_deps
+    - wildguess if a package if a PECL and use the appropriate prefix
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 24 Jul 2011 23:52:07 +0200
+
+pkg-php-tools (0.4) unstable; urgency=low
+
+  * phppkginfo:
+    - add support for PEAR_PackageFile_v1 to hasphpscript
+    - add no-op support for PEAR_PackageFile_v1 to debian_deps
+    - prefer package2.xml over package.xml if present
+  * dh_phppear: Drop the dot at end of summary if present (prevent
+    description-synopsis-might-not-be-phrased-properly lintian warning)
+  * README.Debian: update to debhelper 8
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 24 Jul 2011 16:08:47 +0200
+
+pkg-php-tools (0.3) unstable; urgency=low
+
+  * Fix changelog generation when there is only one item
+  * Change phppkginfo usage to put command first
+  * phppkginfo:
+    - implement an algorithm constructing the debian package name
+      from the pear channel url and package name
+    - rewritten to use PEAR_PackageFile methods (commands release_license and
+      packagerversion dropped)
+    - added command debian_pkgname
+    - added command debian_version
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 24 Jul 2011 01:07:27 +0200
+
+pkg-php-tools (0.2) unstable; urgency=low
+
+  * bin/dh_phppear: Format ${phppear:description} as recommended by policy
+    (Wrap and replace empty lines with a dot)
+  * Debian::Debhelper::Buildsystem::phppear: install upstream changelog
+
+ -- Mathieu Parent <sathieu@debian.org>  Fri, 22 Jul 2011 22:18:29 +0200
+
+pkg-php-tools (0.1) unstable; urgency=low
+
+  * Initial Release (Closes: #629541).
+  * Perl's Debian::Debhelper::Buildsystem::phppear: Automatic builder
+  * Perl's Debian::Debhelper::Sequence::phppear
+  * bin/dh_phppear: calculates PHP PEAR dependencies and add them to
+    ${phppear:*} substvars
+  * Manpage for dh_phppear
+  * lib/scripts/phppkginfo:
+    - Stolen from package dh-make-php
+    - added -d option: print debug to STDERR
+    - added "channel" command: print the PEAR channel URL
+    - added "debian_deps" command: print a dependency list, the debian way
+    - don't validate package files (this allows one to build package from
+      unregistred channels
+    - Check first for package.xml in subdirs, to have correct relative dirs
+    - Remove old pear compatibility
+    - various other small changes
+  * Thanks to Gunnar Wrobel for all the tests!
+
+ -- Mathieu Parent <sathieu@debian.org>  Sun, 03 Jul 2011 15:27:58 +0200

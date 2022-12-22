@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.8.1" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.0     http://pear.php.net/dtd/package-2.0.xsd">
+ <name>MyProject_Packages</name>
+ <channel>pear.php.net</channel>
+ <summary>this is a wrapper package for installing dependencies for MyProject.</summary>
+ <description>&lt;Some random notes&gt;
+    This is a paragraph.
+
+    Those are bullets:
+    * Number one
+    * Number two
+ </description>
+ <lead>
+  <name>Fred</name>
+  <user>fred</user>
+  <email>fred@example.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-05-08</date>
+ <time>00:58:09</time>
+ <version>
+  <release>1.2.1</release>
+  <api>1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+ <notes>
+&lt;none&gt;
+ </notes>
+ <contents>
+  <dir baseinstalldir="/dev/null" name="/">
+   <file baseinstalldir="/dev/null" md5sum="d41d8cd98f00b204e9800998ecf8427e" name="empty.php" role="php"/>
+   <file baseinstalldir="/dev/null" md5sum="bd7fe36471b694c054f24d5210413ec8" name="empty_test.php" role="test"/>
+   <file baseinstalldir="/dev/null" md5sum="bd7fe36471b694c054f24d5210413ec8" name="empty_test.php" role="test">
+    <tasks:replace from="@package_version@" to="version" type="package-info" />
+   </file>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.1</min>
+   </php>
+   <pearinstaller>
+    <min>1.8.0</min>
+   </pearinstaller>
+   <package>
+    <name>Alpha</name>
+    <channel>pear.php.net</channel>
+    <min>1.0a</min>
+    <max>2.0alpha3</max>
+   </package>
+   <package>
+    <name>Beta</name>
+    <channel>pear.php.net</channel>
+    <min>1.0b2</min>
+    <max>2.0beta4</max>
+    <exclude>2.0beta4</exclude>
+   </package>
+   <package>
+    <name>RC</name>
+    <channel>pear.php.net</channel>
+    <min>1.0RC2</min>
+    <max>2.0RC5</max>
+   </package>
+   <package>
+    <name>Horde_Alarm</name>
+    <channel>pear.horde.org</channel>
+    <min>2.2.0</min>
+    <max>3.0.0alpha1</max>
+    <exclude>3.0.0alpha1</exclude>
+   </package>
+   <package>
+    <name>PHPUnit</name>
+    <channel>pear.phpunit.de</channel>
+    <min>1.1</min>
+    <max>1.9</max>
+   </package>
+   <os>
+    <name>linux</name>
+   </os>
+  </required>
+  <optional>
+    <extension>
+    <name>mysqli</name>
+    </extension>
+  </optional>
+ </dependencies>
+ <phprelease/>
+ <changelog>
+  <release>
+   <version>
+    <release>0.0.1</release>
+    <api>0.0.1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-05-08</date>
+   <license uri="http://www.gnu.org/licenses/lgpl.html">LGPL</license>
+   <notes>
+&lt;none&gt;
+   </notes>
+  </release>
+ </changelog>
+</package>

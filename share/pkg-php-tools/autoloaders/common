@@ -1,0 +1,17 @@
+symfony polyfill-apcu none
+symfony polyfill-ctype none
+symfony polyfill-iconv none
+symfony polyfill-intl-grapheme none
+symfony polyfill-intl-icu none
+symfony polyfill-intl-idn none
+symfony polyfill-intl-messageformatted none
+symfony polyfill-intl-normalizer none
+symfony polyfill-mbstring none
+symfony polyfill-php54 none
+symfony polyfill-php55 none
+symfony polyfill-php56 none
+symfony polyfill-php70 none
+symfony polyfill-php71 none
+symfony polyfill-php72 none
+symfony polyfill-php73 none
+symfony polyfill-xml none

@@ -1,0 +1,40 @@
+{
+    "name": "vendor/project",
+    "type": "library",
+    "description": "Some project, from some vendor, from somewhere. Also with a very long line to check for that too ;-).",
+    "keywords": ["Test", "Project"],
+    "homepage": "http://example.org/",
+    "license" : "BSD-3-Clause",
+    "authors": [
+        {
+            "name" : "Foo Bar",
+            "email" : "foo.bar@example.org"
+        }
+    ],
+    "require-dev" : {
+        "overrideme/overrideme-sub" : "3.7.*"
+    },
+    "require": {
+        "php" : ">=5.2",
+        "proj1/pack1" : "~2.0",
+        "proj1/proj1-pack2": "*",
+        "ext-spl": "*",
+        "symfony/polyfill-intl-icu": "^1.0"
+    },
+    "recommend" : {
+        "ocramius/proxy-manager" : ">=0.3.1,<0.4-dev"
+    },
+    "suggest" : {
+        "ext-apc" : "This may be a comment",
+        "ext-curl" : "*"
+    },
+    "provide" : {
+        "example/project" : "1.7.*",
+        "ext-curl" : "*"
+    },
+    "autoload": {
+        "files": [
+            "src/Vendor/Project/helpers.php"
+        ]
+    }
+}

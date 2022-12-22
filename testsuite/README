@@ -1,0 +1,2 @@
+- Tests are under testsuite/tests, with the .sh suffix
+- Return code: 0=PASS, 1=FAILED, 2=SKIPPED
