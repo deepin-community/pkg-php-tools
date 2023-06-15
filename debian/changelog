@@ -1,8 +1,28 @@
-pkg-php-tools (1.42) UNRELEASED; urgency=medium
+pkg-php-tools (1.44) unstable; urgency=medium
 
-  * update
+  * Team upload
 
- -- Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>  Wed, 25 May 2022 10:54:32 +0800
+  [ François Kooman ]
+  * sodium is also a builtin extension
+
+  [ David Prévot ]
+  * Ignore polyfill-php82 now that PHP 8.2 is default
+  * Update standards version to 4.6.2, no changes needed.
+
+ -- David Prévot <taffit@debian.org>  Sat, 28 Jan 2023 16:13:42 +0100
+
+pkg-php-tools (1.43) unstable; urgency=medium
+
+  * Team upload
+
+  [ David Prévot ]
+  * Suggest to use package (not src:package) for overrides
+  * Adapt tests to new output (Closes: #1011911)
+
+  [ Robin Gustafsson ]
+  * Add overrides for new Symfony polyfills
+
+ -- David Prévot <taffit@debian.org>  Fri, 27 May 2022 09:44:14 +0200
 
 pkg-php-tools (1.42) unstable; urgency=medium
 

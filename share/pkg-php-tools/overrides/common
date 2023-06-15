@@ -23,4 +23,9 @@ symfony polyfill-php70 builtin
 symfony polyfill-php71 builtin
 symfony polyfill-php72 builtin
 symfony polyfill-php73 builtin
+symfony polyfill-php74 builtin
+symfony polyfill-php80 builtin
+symfony polyfill-php81 builtin
+symfony polyfill-php82 builtin
+symfony polyfill-uuid php-uuid none
 symfony polyfill-xml php-xml none

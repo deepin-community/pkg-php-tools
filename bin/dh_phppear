@@ -72,7 +72,7 @@ This feature requires pkg-php-tools (>= 1.14~).
 Package that don't want to follow automatic PEAR package name to Debian package
 name conversion can override the conversion by creating this file.
 
-It can be installed in B</usr/share/pkg-php-tools/overrides/>I<src:package>.
+It can be installed in B</usr/share/pkg-php-tools/overrides/>I<package>.
 
 This feature requires pkg-php-tools (>= 1~).
 

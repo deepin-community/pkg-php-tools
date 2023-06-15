@@ -71,7 +71,7 @@ class Overrides {
             'calendar', 'core', 'ctype', 'date', 'dba',
             'ereg', 'exif', 'fileinfo', 'filter', 'ftp', 'gettext', 'hash',
             'iconv', 'libxml', 'openssl', 'pcntl', 'pcre', 'phar', 'posix',
-            'reflection', 'session', 'shmop', 'sockets',
+            'reflection', 'session', 'shmop', 'sockets', 'sodium',
             'spl', 'standard', 'sysvmsg', 'sysvsem', 'sysvshm', 'tokenizer',
             'xmlreader', 'xmlwriter', 'zlib',
             // Dynamically compiled extensions

@@ -14,4 +14,9 @@ symfony polyfill-php70 none
 symfony polyfill-php71 none
 symfony polyfill-php72 none
 symfony polyfill-php73 none
+symfony polyfill-php74 none
+symfony polyfill-php80 none
+symfony polyfill-php81 none
+symfony polyfill-php82 none
+symfony polyfill-uuid none
 symfony polyfill-xml none
